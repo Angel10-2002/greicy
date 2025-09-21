@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores para ti 💛</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      /* Fondo degradado amarillento oscuro */
+      background: linear-gradient(to bottom, #4d3900, #1f1500);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: #FFD700;
+      text-align: center;
+    }
+
+    /* Lienzo de fuegos artificiales */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .contenedor {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .titulo {
+      font-size: 2.5rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .mensaje {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .imagenes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .imagenes img {
+      max-height: 200px;
+      border-radius: 15px;
+    }
+
+    .flores {
+      max-height: 240px;
+    }
+
+    .corazon {
+      position: fixed;
+      font-size: 24px;
+      color: red;
+      animation: flotar 6s linear forwards;
+      z-index: 3;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fuegos artificiales -->
+  <canvas id="canvas"></canvas>
+
+  <div class="contenedor">
+    <h1 class="titulo">🌻 Flores para ti 🌻</h1>
+    <h2 class="mensaje">💛 TE AMO GREICY 💛</h2>
+
+    <div class="imagenes">
+      <img src="img1.jpeg" alt="Foto 1">
+      <img src="flores.png" alt="Flores" class="flores">
+      <img src="img2.jpeg" alt="Foto 2">
+    </div>
+  </div>
+
+  <script>
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.innerText = "❤️";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.bottom = "0";
+      corazon.style.fontSize = Math.random() * 20 + 20 + "px";
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 6000);
+    }
+
+    setInterval(crearCorazon, 800);
+  </script>
+
+  <script src="fireworks.js"></script>
+</body>
+</html>
