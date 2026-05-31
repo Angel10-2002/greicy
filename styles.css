@@ -1,0 +1,215 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #121214;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden; /* Evita scrolls raros en la bienvenida */
+}
+
+/* ==========================================
+   PANTALLA DE BIENVENIDA (SPLASH SCREEN)
+   ========================================== */
+#welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #2e1a47 0%, #0f081d 100%); /* Lila oscuro tipo espacio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* Mensaje Centrado Animado */
+.welcome-message {
+    color: #f3e8ff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.4);
+    animation: pulse 2s infinite ease-in-out;
+    z-index: 10;
+}
+
+/* Efecto de Estrellas de Fondo utilizando Box-Shadows */
+.stars, .stars2 {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    border-radius: 50%;
+}
+.stars {
+    box-shadow: 120px 200px #fff, 450px 80px #fff, 800px 400px #fff, 250px 600px #fff, 700px 150px #fff, 150px 350px #fff, 600px 500px #fff, 900px 700px #fff;
+    animation: twinkle 3s infinite alternate;
+}
+.stars2 {
+    width: 3px;
+    height: 3px;
+    box-shadow: 300px 120px rgba(255,255,255,0.5), 500px 380px rgba(255,255,255,0.7), 100px 520px rgba(255,255,255,0.6), 850px 220px rgba(255,255,255,0.4);
+    animation: twinkle 4s infinite alternate-reverse;
+}
+
+/* Animaciones del Splash */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 25px rgba(168, 85, 247, 1); }
+}
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Clase para desvanecer */
+.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ==========================================
+   ESTILOS DE LA CALCULADORA
+   ========================================== */
+.calculator {
+    background-color: #1c1c1e;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 24px;
+    padding: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    transition: max-width 0.3s ease, opacity 0.8s ease;
+    opacity: 0; /* Inicia invisible para aparecer suavemente */
+}
+
+/* Cuando la pantalla de carga se va, esta clase activa la calculadora */
+.calculator.show {
+    opacity: 1;
+}
+
+/* Pantalla LCD */
+.display {
+    background-color: #2c2c2e;
+    color: #fff;
+    padding: 15px;
+    border-radius: 16px;
+    text-align: right;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90px;
+}
+
+.indicators {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #00d2c4;
+    font-weight: bold;
+}
+
+#operation {
+    font-size: 1rem;
+    color: #aeaeb2;
+    min-height: 1.2rem;
+    word-break: break-all;
+}
+
+#result {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+/* Panel superior */
+.control-panel {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.btn-ctrl {
+    background-color: #3a3a3c;
+    color: #d1d1d6;
+    border: none;
+    padding: 8px 2px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Distribución del teclado */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.scientific-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.numeric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* Botones individuales */
+.btn {
+    border: none;
+    padding: 14px 4px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.num { background-color: #2c2c2e; color: #fff; }
+.operator { background-color: #3a3a3c; color: #ff9f0a; font-size: 1.3rem; }
+.scientific { background-color: #242426; color: #0a84ff; font-size: 0.9rem; }
+.action { color: #fff; font-size: 0.9rem; font-weight: bold; }
+.clear { background-color: #ff453a; }
+.delete { background-color: #ff9f0a; }
+
+.equal {
+    background-color: #30d158;
+    color: #fff;
+    grid-row: span 2;
+    font-size: 1.5rem;
+}
+
+.zero-btn {
+    grid-column: span 1;
+}
+
+/* Responsividad para Laptops */
+@media (min-width: 650px) {
+    .calculator {
+        max-width: 750px;
+    }
+    .keyboard {
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .scientific-grid {
+        grid-template-columns: repeat(4, 1fr);
+        flex: 1;
+    }
+    .numeric-grid {
+        flex: 1;
+    }
+}
